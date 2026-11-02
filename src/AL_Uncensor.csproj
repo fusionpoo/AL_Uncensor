@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Build: dotnet build -c Release -p:GameDir="D:\Games\AmanatsuLocation"  (path with BepInEx already installed and run once) -->
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>AL_Uncensor</AssemblyName>
+    <RootNamespace>AL_Uncensor</RootNamespace>
+    <LangVersion>10</LangVersion>
+    <Nullable>disable</Nullable>
+    <Optimize>true</Optimize>
+    <DebugType>portable</DebugType>
+    <GameDir Condition="'$(GameDir)' == ''">C:\Games\AmanatsuLocation</GameDir>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <NoStandardLib>true</NoStandardLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AL_Uncensor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- .NET runtime shipped with BepInEx (game\dotnet) -->
+    <Reference Include="$(GameDir)\dotnet\System.Runtime.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Private.CoreLib.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Collections.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Linq.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Runtime.InteropServices.dll" />
+    <Reference Include="$(GameDir)\dotnet\netstandard.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Runtime.Extensions.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Memory.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.ObjectModel.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Threading.dll" />
+    <Reference Include="$(GameDir)\dotnet\System.Collections.Concurrent.dll" />
+    <!-- BepInEx 6 IL2CPP + interop assemblies (generated on first run into game\BepInEx\interop) -->
+    <Reference Include="$(GameDir)\BepInEx\core\BepInEx.Core.dll" />
+    <Reference Include="$(GameDir)\BepInEx\core\BepInEx.Unity.IL2CPP.dll" />
+    <Reference Include="$(GameDir)\BepInEx\core\BepInEx.Unity.Common.dll" />
+    <Reference Include="$(GameDir)\BepInEx\core\Il2CppInterop.Runtime.dll" />
+    <Reference Include="$(GameDir)\BepInEx\core\Il2CppInterop.Common.dll" />
+    <Reference Include="$(GameDir)\BepInEx\core\0Harmony.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\Assembly-CSharp.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\Il2Cppmscorlib.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\Il2CppSystem.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\Il2CppSystem.Core.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\UnityEngine.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\UnityEngine.CoreModule.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\UnityEngine.AssetBundleModule.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\UniTask.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\R3.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\ObservableCollections.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\__Generated.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\Assembly-CSharp-firstpass.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\EPO.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\FluidFlow.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\MagicaClothV2.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\UnityEngine.AnimationModule.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\UnityEngine.PhysicsModule.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\Unity.Addressables.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\Unity.ResourceManager.dll" />
+    <Reference Include="$(GameDir)\BepInEx\interop\ZLinq.dll" />
+  </ItemGroup>
+</Project>

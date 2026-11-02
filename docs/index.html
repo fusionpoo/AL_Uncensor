@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AL_Uncensor</title>
+<meta name="description" content="Uncensor mod for Amanatsu Location (ILLGAMES): real geometry for both sexes, installed as one BepInEx plugin folder.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600&family=Nunito+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top"><div class="in">
+  <a class="brand" href="#">AL_<span>Uncensor</span></a>
+  <a class="l" href="#install">Install</a><a class="l" href="#config">Config</a><a class="l" href="#how">How it works</a><a class="l" href="#troubleshooting">Troubleshooting</a><a class="l" href="#changelog">Changelog</a>
+  <span class="sp"></span>
+  <a class="l" href="https://github.com/fusionpoo/AL_Uncensor">GitHub</a>
+</div></nav>
+<div class="wrap">
+<header class="hero">
+  <div>
+    <div class="eyebrow">Amanatsu Location · BepInEx 6 IL2CPP</div>
+    <h1>Uncensor mod, installed as one plugin folder</h1>
+    <p class="lede">Replaces the mosaic with real geometry for both sexes: vulva and anus stitched into the body meshes, a modeled penis with glans detail, hair masking and a pink tint. The game's own files stay untouched.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/fusionpoo/AL_Uncensor/releases/latest">Download latest release</a>
+      <a class="btn" href="https://github.com/fusionpoo/AL_Uncensor">Source on GitHub</a>
+    </div>
+  </div>
+  <div class="facts"><dl>
+    <dt>Version</dt><dd>0.9.1</dd>
+    <dt>Game</dt><dd>Amanatsu Location (Steam build, Unity 6000.0.65f1)</dd>
+    <dt>Needs</dt><dd>BepInEx 6 IL2CPP, be.788 or newer</dd>
+    <dt>Install size</dt><dd>~19 MB (two body bundles, plugin, two masks)</dd>
+    <dt>Game files changed</dt><dd>none</dd>
+    <dt>Meshes</dt><dd>DilleDing's Aicomi uncensor hardmod</dd>
+  </dl></div>
+</header>
+
+<section id="features">
+  <h2>What it does</h2>
+  <div class="cols">
+    <div class="card"><h3>Female</h3><p>Vulva, perineum and anus are stitched directly into all nine crotch body meshes as one closed surface. No floating patch, nothing to clip, no see-through at the edges. Works in the maker, free roam and H.</p></div>
+    <div class="card"><h3>Male</h3><p>Modeled penis with its own UV layout and a glans detail mask; base colour is sampled from the character's generated skin texture at runtime so it follows skin-tone changes. 15% less girth than the Aicomi original.</p></div>
+    <div class="card"><h3>Finish</h3><p>Pubic hair is masked off the labia while the mons hair stays, and a soft pink tint is painted inside the slit through the body shader's own detail layer. Both adjustable.</p></div>
+    <div class="card"><h3>Female-only mode</h3><p>Turn "Uncensor males" off and the plugin serves a second bundle with the vanilla penis, leaving males exactly as the game ships them.</p></div>
+  </div>
+</section>
+
+<section id="install">
+  <h2>Install</h2>
+  <ol class="steps">
+    <li><div>Install <strong>BepInEx 6 IL2CPP</strong> (tested with 6.0.0-be.788) and run the game once so it generates <code>BepInEx\interop</code>.</div></li>
+    <li><div>Download the release zip and merge its <code>BepInEx</code> folder into the game folder. Everything lands in <code>BepInEx\plugins\AL_Uncensor\</code>: <code>AL_Uncensor.dll</code>, <code>body_00.unity3d</code>, <code>body_00.female.unity3d</code>, <code>cm_dankon_00_det.rg</code>, <code>labia_mask.r</code>.</div></li>
+    <li><div>Start the game. <code>BepInEx\LogOutput.log</code> should contain <span class="log">AL Uncensor 0.9.1 loaded</span> and, once a character loads, <span class="log">redirecting lib/chara/body/body_00.unity3d -&gt; …</span>.</div></li>
+  </ol>
+  <p class="prose">Uninstall: delete <code>BepInEx\plugins\AL_Uncensor</code>. If you used a pre-0.9 version that replaced <code>lib\chara\body\body_00.unity3d</code>, restore your backup of the vanilla file.</p>
+</section>
+
+<section id="config">
+  <h2>Configuration</h2>
+  <p class="prose"><code>BepInEx\config\AL_Uncensor.cfg</code>, created on first run. Every entry can be changed live with ConfigurationManager.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Entry</th><th>Default</th><th>Effect</th></tr>
+    <tr><td>Enabled</td><td>true</td><td>Master switch; takes effect on the next character load.</td></tr>
+    <tr><td>Uncensor females</td><td>true</td><td>Per sex.</td></tr>
+    <tr><td>Uncensor males</td><td>true</td><td>Off = female-only mode: serves <code>body_00.female.unity3d</code>, male mosaic untouched.</td></tr>
+    <tr><td>Show outside H scenes</td><td>true</td><td>Clears the game's HideMoz flag so the maker and free roam show the genitals too (clothing still covers them).</td></tr>
+    <tr><td>No pubic hair on female genitals</td><td>true</td><td>Fades the underhair texture out below the vulva line.</td></tr>
+    <tr><td>Keep hair above the vulva</td><td>true</td><td>Keep the mons hair; only remove it from the labia.</td></tr>
+    <tr><td>Hair cut line v</td><td>0.534</td><td>Row of the underhair texture (0–1) below which hair fades. Labia sit at ~0.52–0.53, mons at 0.534–0.556.</td></tr>
+    <tr><td>Hair fade band</td><td>0.012</td><td>Height of the fade just below the cut line.</td></tr>
+    <tr><td>Vulva pink tint</td><td>0.5</td><td>0–1. Painted into channel R of the body's <code>_Detail_mask_02</code>.</td></tr>
+    <tr><td>Penis glans detail</td><td>true</td><td>Use the glans mask on the ported penis.</td></tr>
+    <tr><td>Glans tint strength</td><td>0.5</td><td>0–1, alpha of <code>_Detail_color_02</code> on the penis material.</td></tr>
+    <tr><td>[Hardmod] Load body bundle from plugin folder</td><td>true</td><td>The runtime redirect. Off = the game's own bundle (only the material swap applies).</td></tr>
+    <tr><td>[Hardmod] Body bundle file</td><td>(empty)</td><td>Override: file name relative to the plugin folder or an absolute path. Empty = pick from the sex switches.</td></tr>
+    <tr><td>[Experimental] Body _DistanceCutoff override</td><td>-1</td><td>Leave at -1. Writing other values to the body material can hide the arm/leg mesh.</td></tr>
+  </table></div>
+</section>
+
+<section id="how">
+  <h2>How it works</h2>
+  <div class="prose">
+    <h3>Hardmod bundle</h3>
+    <p>Three Python tools (UnityPy, trimesh, scipy) turn a vanilla <code>body_00.unity3d</code> plus DilleDing's Aicomi hardmod bundle into the shipped bundles. Amanatsu's units are 10× Aicomi's and the rigs are otherwise identical, so the port is a scale about the <code>cf_j_dan101_00</code> bind pose for the penis and a weld-aware cut of DilleDing's female body for the vulva.</p>
+    <p><strong>merge_female.py</strong> cuts the vulva + perineum + anus as one region, transfers Amanatsu's own skin weights and UV1–3 by nearest-surface barycentric interpolation, deletes the body triangles under it, pulls the surrounding ring onto DilleDing's surface and zips the hole boundary to the patch rim. Any bridge triangle whose face normal points against its vertex normals is re-wound. The result is one closed mesh per body variant (<code>o_lower_type01–05</code>, <code>o_onepi_type01–04</code>); the vanilla <code>mnpb</code>/<code>mnpa</code> genital meshes are emptied. Vertex colours are object-space smoothed normals encoded as <code>(n·0.5+0.5)·255</code>, which the body shader's outline pre-pass expects.</p>
+    <p><strong>inject_dankon2.py</strong> ports <code>o_dankon</code> with DilleDing's UV layout, scales the shaft radially (<code>--girth 0.85</code>) and carries the same vertex attributes. <strong>make_dankon_det.py</strong> extracts the glans mask as a raw RG file because this game ships no ImageConversion module.</p>
+    <h3>Why a single mesh</h3>
+    <p>The body shader (<code>AL/skin_body</code>) has an inverted-hull outline pre-pass (Cull Front) and back-face culling. Any open edge or back-facing triangle in skin shows as a grey sliver or a hole, and a separate patch over a hole can never be sealed against a posed, slider-scaled body. Stitching the geometry in removes the problem instead of hiding it.</p>
+    <h3>Plugin</h3>
+    <p>Hooks every <code>AssetBundle.LoadFromFile</code> / <code>LoadFromFileAsync</code> overload and the internal funnels; a load whose path ends in <code>lib/chara/body/body_00.unity3d</code> is re-issued with the plugin-folder file. Swaps the mosaic material (<code>AL/sub/mnpb</code>) for the character's live skin material on <code>HumanBody.SetBodyBaseMaterial</code>, <code>Human.Load/Reload/ReloadSkin</code> and <code>UpdateVisible</code>, clears <code>HideMoz</code> outside H, masks the underhair texture and paints the labia tint on the female body material, and gives the penis its own material clone with a flat skin-tone texture (sampled every 30 frames), body-UV textures nulled and the glans mask applied.</p>
+    <h3>Building</h3>
+<pre><code>dotnet build -c Release -p:GameDir="D:\Games\AmanatsuLocation" src/AL_Uncensor.csproj
+pip install UnityPy numpy scipy trimesh rtree pillow
+./build_bundle.sh &lt;vanilla body_00.unity3d&gt; &lt;Aicomi hardmod body_00.unity3d&gt;</code></pre>
+  </div>
+</section>
+
+<section id="troubleshooting">
+  <h2>Troubleshooting</h2>
+  <details><summary>The log says the plugin loaded but the genitals are the old low-poly placeholders</summary><p>The bundle redirect didn't find its file. Look for <code>hardmod bundle not found next to the plugin</code> in the log and check that <code>body_00.unity3d</code> sits next to <code>AL_Uncensor.dll</code>. With "Uncensor males" off it needs <code>body_00.female.unity3d</code> instead.</p></details>
+  <details><summary>Nothing changes at all</summary><p>Check <code>BepInEx\LogOutput.log</code> for <code>AL Uncensor … loaded</code>. If it's missing, BepInEx isn't running (run the game once after installing it; the <code>interop</code> folder must exist).</p></details>
+  <details><summary>The game updated</summary><p>The mod keeps serving its own bundle, so it keeps working until the game changes the body prefab itself. If a new body ships, rebuild with <code>build_bundle.sh</code> against the new vanilla bundle, or wait for a release.</p></details>
+  <details><summary>Pink tint too strong / hair line wrong</summary><p>Lower "Vulva pink tint"; move "Hair cut line v" up or down in steps of 0.005.</p></details>
+  <details><summary>Reporting a problem</summary><p>Attach <code>BepInEx\LogOutput.log</code> and a screenshot. Verbose logging (on by default) records every renderer swap and the bundle paths the game loads.</p></details>
+</section>
+
+<section id="changelog">
+  <h2>Changelog</h2>
+  <ul class="changelog prose">
+    <li><strong>0.9.1</strong> — female-only mode (second bundle, vanilla penis); penis girth −15%; "Body bundle file" is an override, empty by default.</li>
+    <li><strong>0.9.0</strong> — hardmod served from the plugin folder via an <code>AssetBundle.LoadFromFile</code> hook; the game's bundle stays vanilla.</li>
+    <li><strong>0.8.0</strong> — pink tint inside the labia through the body's detail mask.</li>
+    <li><strong>0.7.x</strong> — penis with DilleDing's UV layout, glans mask and runtime skin tone; vertex colours as smoothed normals; hardmod v13–v16 (single-mesh merge, rim-band conform, folded-triangle fix).</li>
+    <li><strong>0.6.0</strong> — pubic-hair mask on the body material.</li>
+    <li><strong>0.5.x and earlier</strong> — material-swap plugin, show outside H, first overlay-patch hardmods.</li>
+  </ul>
+</section>
+
+<footer>
+  Meshes and glans mask by <strong>DilleDing</strong> (Aicomi ACUncensorHardmod). Port, plugin and tooling by fusionpoo with Claude. Code is MIT; DilleDing's assets are his.
+</footer>
+</div>
+</body>
+</html>
